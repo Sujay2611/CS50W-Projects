@@ -1,0 +1,74 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Book Search
+{% endblock %}
+
+{% block body %}
+  <ul class="nav justify-content-end" style="height: 40px;">
+    {% if loggedin %}
+      <li class="nav-item">
+      <a class="nav-link" href="/" style="font-size: 25px;">Home</a>
+      </li>
+      <li class="nav-item">
+      <a class="nav-link" href="/logout" style="font-size: 25px;">Logout</a>
+      </li>
+    {% else %}
+      <li class="nav-item">
+      <a class="nav-link" href="/" style="font-size: 25px;">Home</a>
+      </li>
+      <li class="nav-item">
+      <a class="nav-link" href="/register" style="font-size: 25px;">Register</a>
+      </li>
+      <li class="nav-item">
+      <a class="nav-link" href="/login" style="font-size: 25px;">Login</a>
+      </li>
+    {% endif %}
+  </ul>
+  <h3 style="margin-top: 40px; margin-bottom: 20px; font-weight: bolder; ">Book Details</h3>
+  <ul>
+        <li>Title: {{ bookdetails.title }}</li>
+        <li>Author: {{ bookdetails.author }}</li>
+        <li>ISBN: {{ bookdetails.isbn }} </li>
+        <li>Publication year: {{ bookdetails.year }}</li>
+        <li>Number of ratings: {{ number_of_ratings }}</li>
+        <li>Average rating: {{ average_rating }}</li>
+  </ul>
+  <br>
+  {% if review_submitted %}
+    <p>You have already submitted a review for this book</p>
+  {% else %}
+  <h3 style="margin-top: 40px; margin-bottom: 20px; font-weight: bolder; ">Write a review</h3>
+  <form method="post">
+    <div class="form-group">
+    <label>Rate this book</label>
+    <select style="width: 10%;" class="form-control" name="rating" required>
+      <option>1</option>
+      <option>2</option>
+      <option>3</option>
+      <option>4</option>
+      <option>5</option>
+    </select>
+    </div>
+    <div class="form-group">
+    <textarea class="form-control" name="review" placeholder="Tell us what you think about this book." rows="3" required></textarea>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+  {% endif %}
+  <h3 style="margin-top: 50px; margin-bottom: 20px; font-weight: bolder; ">Reviews</h3>
+  {% if showreview %}
+    {% for eachreview in allreviews %}
+      <p><b>{{ eachreview.username }}</b><br>
+      rating: {{ eachreview.rating }}<br>
+      review: {{ eachreview.review }}</p>
+      <br>
+      <br>
+    {% endfor %}
+
+
+  {% else %}
+    <p>No reviews written for this book so far.</p>
+
+  {% endif %}
+{% endblock %}

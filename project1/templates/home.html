@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Home Page
+{% endblock %}
+
+{% block body %}
+  <ul class="nav justify-content-end" style="height: 40px;">
+    {% if loggedin %}
+      <li class="nav-item">
+      <a class="nav-link" href="/" style="font-size: 25px;">Home</a>
+      </li>
+      <li class="nav-item">
+      <a class="nav-link" href="/logout" style="font-size: 25px;">Logout</a>
+      </li>
+    {% else %}
+      <li class="nav-item">
+      <a class="nav-link" href="/" style="font-size: 25px;">Home</a>
+      </li>
+      <li class="nav-item">
+      <a class="nav-link" href="/register" style="font-size: 25px;">Register</a>
+      </li>
+      <li class="nav-item">
+      <a class="nav-link" href="/login" style="font-size: 25px;">Login</a>
+      </li>
+    {% endif %}
+  </ul>
+  <h2 style="margin-top: 300px; margin-left: 120px; font-size: 60px;">Welcome to Book Review Website</h2>
+{% endblock %}

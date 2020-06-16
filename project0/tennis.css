@@ -1,0 +1,78 @@
+.row {
+  background-color: #333;
+  top: 0;
+}
+
+a {
+  border-right: 1px solid #bbb;
+  text-align: center;
+}
+
+.row a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.row a:hover {
+  background-color: #111;
+}
+a:last-child {
+  border-right: none;
+}
+
+table {
+  border-collapse: collapse;
+  width: 70%;
+  height: 50px;
+  padding: 0px;
+  margin-top: 20px;
+  margin-left:150px;
+}
+
+table,th,td {
+  border: 1px solid black;
+  text-align: center;
+}
+
+h2 {
+  margin-top: 20px;
+  margin-left:150px;
+  color: rgb(30, 0, 163);
+  font-weight: bold;
+  font-family: sans-serif;
+}
+
+.t2 > p {
+  background-color: rgb(247, 141, 141);
+  display: inline-block;
+  width: 80%;
+  margin-right: 200px;
+  padding: 5px;
+  font-family: sans-serif;
+  font-size: 16px;
+
+}
+
+.matches {
+  margin: 20px;
+  margin-top: 50px;
+}
+
+.t {
+  display: flex;
+}
+.t1,.t2 {
+  flex: 1;
+}
+
+#c3 {
+  margin-left: 150px;
+  margin-right: 150px;
+}
+
+ol > li {
+  font-weight: bold;
+}
