@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+{% block head %}
+  <script src="{{ url_for('static', filename='main.js') }}"></script>
+{% endblock %}
+
+{% block title %}
+  Main Page
+{% endblock %}
+
+{% block body %}
+  <ul class="nav justify-content-end" style="height: 40px;">
+    <li class="nav-item">
+    <a class="nav-link" href="/logout" style="font-size: 25px;">Logout</a>
+    </li>
+  </ul>
+  <button type="button" class="btn btn-primary" name="addchannels" id="add">Add Channel</button>
+  <br>
+  <br>
+  <div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    List of channels
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    {% for channel in channelslist %}
+      <a class="dropdown-item" href="{{ url_for('viewchannel', channelname=channel) }}">{{ channel }}</a>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

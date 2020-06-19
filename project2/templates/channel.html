@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+
+{% block head %}
+    <script src="{{ url_for('static', filename='channel.js') }}"></script>
+{% endblock %}
+
+{% block title %}
+  Channel Page
+{% endblock %}
+
+{% block body %}
+  <h1 style="margin-top: 20px;">{{ channelname }}</h1>
+  <br>
+  <h3>List of Messages</h3>
+  <br>
+    <ul id="messages">
+      {% for m in msglist %}
+      <div>
+        <li>
+          <p>
+            <b>{{ m["user"] }}</b>
+            <br>
+            <span>{{ m["msg"] }}</span>
+            {% if m["user"] == username %}
+              <button type="button" style="float: right;" class="btn btn-primary" name="button">Delete Message</button>
+            {% endif %}
+            <br>
+            <span>{{ m["time"] }}</span>
+            <br>
+          </p>
+
+        </li>
+      </div>
+      {% endfor %}
+    </ul>
+  <br>
+  <form>
+    <div class="input-group mb-3" style="width: 550px">
+    <input id="text" type="text" class="form-control" required name="message" placeholder="Write a message">
+    &nbsp;
+    &nbsp;
+    <div class="input-group-append">
+      <button class="btn btn-primary" id="submit" type="button" style="width: 100px;">Enter</button>
+    </div>
+    </div>
+  </form>
+  <a class="btn btn-primary" style="margin-top: 20px;" href="/channels" role="button">Exit Channel</a>
+{% endblock %}
