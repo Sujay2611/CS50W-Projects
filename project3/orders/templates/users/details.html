@@ -1,0 +1,123 @@
+{% extends "users/base.html" %}
+
+{% block title %}
+  Item details page
+{% endblock %}
+
+{% block body %}
+  <form method="post">
+    {% csrf_token %}
+    <ul class="nav justify-content-end" style="height: 50px; margin-bottom: 40px;">
+      <li class="nav-item">
+      <a class="nav-link" style="margin-top: 5px; font-size: 25px;"  href="{% url 'index' %}">Menu</a>
+      </li>
+      &nbsp;&nbsp;&nbsp;
+      <li class="nav-item">
+      <a class="nav-link" style="margin-top: 5px; font-size: 25px;"  href="{% url 'cart' %}">Cart</a>
+      </li>
+      &nbsp;&nbsp;&nbsp;
+      <li class="nav-item">
+      <a class="nav-link" style="margin-top: 5px; font-size: 25px;"  href="{% url 'logout' %}">Logout</a>
+      </li>
+    </ul>
+    <h3 style="margin-top: 20px;">{{ type }}</h3>
+    <hr>
+    <p>Type: <span style="position: fixed; left: 50%;">{{ name }}</span></p>
+    {% if size != 'singlesize' %}
+      <hr>
+      <p>Size: <span style="position: fixed; left: 50%;">{{ size }}</span></p>
+    {% endif %}
+    <hr>
+    <p>Price: <span style="position: fixed; left: 50%;">{{ price }}</span></p>
+    {% if val != 0 %}
+      <hr>
+      <p>Number of toppings: <span style="position: fixed; left: 50%;">{{ val }}</span></p>
+      {% if val == 1 %}
+        <hr>
+        <p>Topping 1:<span style="position: fixed; left: 50%;">
+          <select name="firsttopping">
+            {% for t in topping %}
+              <option>{{t.name}}</option>
+            {% endfor %}
+          </select>
+        </span></p>
+      {% elif val == 2 %}
+        <hr>
+        <p>Topping 1:<span style="position: fixed; left: 50%;">
+          <select name="firsttopping">
+            {% for t in topping %}
+              <option>{{t.name}}</option>
+            {% endfor %}
+          </select>
+        </span></p>
+        <hr>
+        <p>Topping 2:<span style="position: fixed; left: 50%;">
+          <select name="secondtopping">
+            {% for t in topping %}
+              <option>{{t.name}}</option>
+            {% endfor %}
+          </select>
+        </span></p>
+      {% elif val == 3 %}
+        <hr>
+        <p>Topping 1:<span style="position: fixed; left: 50%;">
+          <select name="firsttopping">
+            {% for t in topping %}
+              <option>{{t.name}}</option>
+            {% endfor %}
+          </select>
+        </span></p>
+        <hr>
+        <p>Topping 2:<span style="position: fixed; left: 50%;">
+          <select name="secondtopping">
+            {% for t in topping %}
+              <option>{{t.name}}</option>
+            {% endfor %}
+          </select>
+        </span></p>
+        <hr>
+        <p>Topping 3:<span style="position: fixed; left: 50%;">
+          <select name="thirdtopping">
+            {% for t in topping %}
+              <option>{{t.name}}</option>
+            {% endfor %}
+          </select>
+        </span></p>
+      {% else %}
+        <hr>
+        <p>Toppings:<span style="position: fixed; left: 50%;">
+          Sausage, Mushrooms, Spinach, Barbeque Chicken, Zucchini
+        </span></p>
+      {% endif %}
+    {% endif %}
+    <hr>
+    <p>Quantity: <span style="position: fixed; left: 50%;"><select style="width: 50px;" name="count">
+      <option>1</option>
+      <option>2</option>
+      <option>3</option>
+      <option>4</option>
+      <option>5</option>
+      <option>6</option>
+      <option>7</option>
+      <option>8</option>
+      <option>9</option>
+      <option>10</option>
+
+    </select></span></p>
+    {% if type == 'Subs' %}
+      <hr>
+      <p>Extra Cheese:<span style="position: fixed; left: 50%;"><input type="checkbox" name="cheese" value="cheese">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+0.5</span></p>
+      {% if name == 'steak with cheese' %}
+        <hr>
+        <p>Mushrooms:<span style="position: fixed; left: 50%;"><input type="checkbox" name="mushrooms" value="Mushrooms">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+0.5</span></p>
+        <hr>
+        <p>Green Peppers:<span style="position: fixed; left: 50%;"><input type="checkbox" name="greenpeppers" value="Green Peppers">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+0.5</span></p>
+        <hr>
+        <p>Onions:<span style="position: fixed; left: 50%;"><input type="checkbox" name="onions" value="Onions">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+0.5</span></p>
+      {% endif %}
+
+    {% endif %}
+    <button type="submit" class="btn btn-primary" style="margin-top: 20px;">Add to cart</button>
+  </form>
+
+{% endblock %}

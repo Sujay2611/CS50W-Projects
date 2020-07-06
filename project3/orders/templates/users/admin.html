@@ -1,0 +1,38 @@
+{% extends "users/base.html" %}
+
+{% block title %}
+  Admin page
+{% endblock %}
+
+{% block body %}
+  <ul class="nav justify-content-end" style="height: 50px; margin-bottom: 40px;">
+    <li class="nav-item">
+    <a class="nav-link" style="margin-top: 5px; font-size: 25px;"  href="{% url 'logout' %}">Logout</a>
+    </li>
+  </ul>
+  <h1>Orders</h1>
+  {% for eachorder in order %}
+    <br>
+    <div style="border: 1px solid black; padding: 15px;">
+      <ul>
+
+      </ul>
+      <li>Order Number - {{eachorder.id}}</li>
+      <li>Username - {{eachorder.user}}</li>
+      <li>Items</li>
+        <ol>
+          {% for item in eachorder.items.all %}
+            <li>{{item.name}}</li>
+              <ul>
+                <li>Size - {{item.size}}</li>
+                <li>Price - {{item.price}}</li>
+                <li>Toppings - {{item.toppings}}</li>
+                <li>Extra - {{item.extras}}</li>
+                <li>Quantity - {{item.quantity}}</li>
+              </ul>
+          {% endfor %}
+        </ol>
+      <li>{{eachorder.subtotal}}</li>
+    </div>
+  {% endfor %}
+{% endblock %}

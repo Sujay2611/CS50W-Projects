@@ -1,0 +1,187 @@
+{% extends "users/base.html" %}
+
+{% block title %}
+  Main Page
+{% endblock %}
+
+{% block body %}
+  <ul class="nav justify-content-end" style="height: 50px; margin-bottom: 40px;">
+    <li class="nav-item">
+    <a class="nav-link" style="margin-top: 5px; font-size: 25px;"  href="{% url 'index' %}">Menu</a>
+    </li>
+    &nbsp;&nbsp;&nbsp;
+    <li class="nav-item">
+    <a class="nav-link" style="margin-top: 5px; font-size: 25px;"  href="{% url 'cart' %}">Cart</a>
+    </li>
+    &nbsp;&nbsp;&nbsp;
+    <li class="nav-item">
+    <a class="nav-link" style="margin-top: 5px; font-size: 25px;"  href="{% url 'logout' %}">Logout</a>
+    </li>
+  </ul>
+  <h1 style="text-align: center; margin-top: 25px;">Menu</h1>
+  <br>
+
+  <ul class="nav nav-tabs">
+    <li class="nav-item" style="width: 16%; text-align: center; background-color: black;">
+      <a class="nav-link" href="#regularpizza" style="color: white;">Regular Pizza</a>
+    </li>
+    <li class="nav-item" style="width: 16%; text-align: center; background-color: black;"">
+      <a class="nav-link" href="#sicilianpizza" style="color: white;">Sicilian Pizza</a>
+    </li>
+    <li class="nav-item" style="width: 16%; text-align: center; background-color: black;"">
+      <a class="nav-link" href="#sub" style="color: white;">Subs</a>
+    </li>
+    <li class="nav-item" style="width: 16%; text-align: center; background-color: black;"">
+      <a class="nav-link" href="#pasta" style="color: white;">Pasta</a>
+    </li>
+    <li class="nav-item" style="width: 16%; text-align: center; background-color: black;"">
+      <a class="nav-link" href="#salad" style="color: white;">Salad</a>
+    </li>
+    <li class="nav-item" style="width: 16%; text-align: center; background-color: black;"">
+      <a class="nav-link" href="#dinnerplatter" style="color: white;">Dinner Platter</a>
+    </li>
+  </ul>
+  <br>
+  <div id="regularpizza" style="text-align: center;">
+    <br>
+    <h3 style="margin-top: 20px; margin-bottom: 20px;">Regular Pizza</h3>
+    <table class="table table-borderless">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+        <th scope="col">Small price</th>
+        <th scope="col">Large price</th>
+        <th scope="col">Number of toppings</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in regularpizza %}
+        <tr>
+          <td>{{ item.name }}</td>
+          <td>{{ item.price_small }}&nbsp;&nbsp;&nbsp;<a href="{% url 'details' type='RegularPizza' name=item.name size='Small'  price=item.price_small val=item.no_of_toppings %}">Add</a></td>
+          <td>{{ item.price_large }}&nbsp;&nbsp;&nbsp;<a href="{% url 'details' type='RegularPizza' name=item.name size='Large'  price=item.price_large val=item.no_of_toppings %}">Add</a></td>
+          <td>{{ item.no_of_toppings }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+    </table>
+
+  </div>
+  <div id="sicilianpizza"  style="text-align: center;">
+    <br>
+    <h3 style="margin-top: 20px; margin-bottom: 20px;">Sicilian Pizza</h3>
+    <table class="table table-borderless">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+        <th scope="col">Small price</th>
+        <th scope="col">Large price</th>
+        <th scope="col">Number of toppings</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in sicilianpizza %}
+        <tr>
+          <td>{{ item.name }}</td>
+          <td>{{ item.price_small }}&nbsp;&nbsp;&nbsp;<a href="{% url 'details' type='SicilianPizza' name=item.name size='Small'  price=item.price_small val=item.no_of_toppings %}">Add</a></td>
+          <td>{{ item.price_large }}&nbsp;&nbsp;&nbsp;<a href="{% url 'details' type='SicilianPizza' name=item.name size='Large'  price=item.price_large val=item.no_of_toppings %}">Add</a></td>
+          <td>{{ item.no_of_toppings }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+    </table>
+
+  </div>
+  <div id="sub" style="text-align: center;">
+    <br>
+    <h3 style="margin-top: 20px; margin-bottom: 20px;">Subs</h3>
+    <table class="table table-borderless">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+        <th scope="col">Small price</th>
+        <th scope="col">Large price</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in sub %}
+        <tr>
+          <td>{{ item.name }}</td>
+          {% if item.price_small == None %}
+            <td></td>
+          {% else %}
+            <td>{{ item.price_small }}&nbsp;&nbsp;&nbsp;<a href="{% url 'details' type='Subs' name=item.name size='Small'  price=item.price_small val=0 %}">Add</a></td>
+          {% endif %}
+          <td>{{ item.price_large }}&nbsp;&nbsp;&nbsp;<a href="{% url 'details' type='Subs' name=item.name size='Large'  price=item.price_large val=0 %}">Add</a></td>
+        </tr>
+      {% endfor %}
+    </tbody>
+    </table>
+
+  </div>
+  <div id="pasta" style="text-align: center;">
+    <br>
+    <h3 style="margin-top: 20px; margin-bottom: 20px;">Pasta</h3>
+    <table class="table table-borderless">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+        <th scope="col">Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in pasta %}
+        <tr>
+          <td>{{ item.name }}</td>
+          <td>{{ item.price }}&nbsp;&nbsp;&nbsp;<a href="{% url 'details' type='Pasta' name=item.name size='singlesize'  price=item.price val=0 %}">Add</a></td>
+        </tr>
+      {% endfor %}
+    </tbody>
+    </table>
+
+  </div>
+  <div id="salad" style="text-align: center;">
+    <br>
+    <h3 style="margin-top: 20px; margin-bottom: 20px;">Salad</h3>
+    <table class="table table-borderless">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+        <th scope="col">Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in salad %}
+        <tr>
+          <td>{{ item.name }}</td>
+          <td>{{ item.price }}&nbsp;&nbsp;&nbsp;<a href="{% url 'details' type='Salad' name=item.name size='singlesize'  price=item.price val=0 %}">Add</a></td>
+        </tr>
+      {% endfor %}
+    </tbody>
+    </table>
+
+  </div>
+  <div id="dinnerplatter" style="text-align: center;">
+    <br>
+    <h3 style="margin-top: 20px; margin-bottom: 20px;">Dinner Platter</h3>
+    <table class="table table-borderless">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+        <th scope="col">Small price</th>
+        <th scope="col">Large price</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in dinnerplatter %}
+        <tr>
+          <td>{{ item.name }}</td>
+          <td>{{ item.price_small }}&nbsp;&nbsp;&nbsp;<a href="{% url 'details' type='DinnerPlatter' name=item.name size='Small'  price=item.price_small val=0 %}">Add</a></td>
+          <td>{{ item.price_large }}&nbsp;&nbsp;&nbsp;<a href="{% url 'details' type='DinnerPlatter' name=item.name size='Large'  price=item.price_large val=0 %}">Add</a></td>
+        </tr>
+      {% endfor %}
+    </tbody>
+    </table>
+
+  </div>
+{% endblock %}

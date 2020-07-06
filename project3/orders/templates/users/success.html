@@ -1,0 +1,22 @@
+{% extends "users/base.html" %}
+
+{% block title %}
+  Order confirmed page
+{% endblock %}
+
+{% block body %}
+  <ul class="nav justify-content-end" style="height: 50px; margin-bottom: 40px;">
+    <li class="nav-item">
+    <a class="nav-link" style="margin-top: 5px; font-size: 25px;"  href="{% url 'index' %}">Menu</a>
+    </li>
+    &nbsp;&nbsp;&nbsp;
+    <li class="nav-item">
+    <a class="nav-link" style="margin-top: 5px; font-size: 25px;"  href="{% url 'cart' %}">Cart</a>
+    </li>
+    &nbsp;&nbsp;&nbsp;
+    <li class="nav-item">
+    <a class="nav-link" style="margin-top: 5px; font-size: 25px;"  href="{% url 'logout' %}">Logout</a>
+    </li>
+  </ul>
+  <h1 style="margin-top: 20px; margin-bottom: 30px;">Order Corfirmed.</h1>
+{% endblock %}

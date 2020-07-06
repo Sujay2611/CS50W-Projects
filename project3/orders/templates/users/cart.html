@@ -1,0 +1,77 @@
+{% extends "users/base.html" %}
+
+{% block title %}
+  Item details page
+{% endblock %}
+
+{% block body %}
+  <ul class="nav justify-content-end" style="height: 50px; margin-bottom: 40px;">
+    <li class="nav-item">
+    <a class="nav-link" style="margin-top: 5px; font-size: 25px;"  href="{% url 'index' %}">Menu</a>
+    </li>
+    &nbsp;&nbsp;&nbsp;
+    <li class="nav-item">
+    <a class="nav-link" style="margin-top: 5px; font-size: 25px;"  href="{% url 'cart' %}">Cart</a>
+    </li>
+    &nbsp;&nbsp;&nbsp;
+    <li class="nav-item">
+    <a class="nav-link" style="margin-top: 5px; font-size: 25px;"  href="{% url 'logout' %}">Logout</a>
+    </li>
+  </ul>
+  <h1 style="margin-top: 20px; margin-bottom: 20px;">Cart</h1>
+  {% if items %}
+    <table class="table">
+      <colgroup>
+          <col width="23%"></col>
+          <col width="8%"></col>
+          <col width="8%"></col>
+          <col width="8%"></col>
+          <col width="23%"></col>
+          <col width="23%"></col>
+          <col width="5%"></col>
+      </colgroup>
+      <thead>
+          <tr>
+              <th>Item</th>
+              <th>Size</th>
+              <th>Quantity</th>
+              <th>Price</th>
+              <th>Toppings</th>
+              <th>Extras</th>
+              <th></th>
+          </tr>
+      </thead>
+      <tbody>
+        {% for item in items %}
+          <tr>
+            <td>{{item.name}}</td>
+            <td>{{item.size}}</td>
+            <td>{{item.quantity}}</td>
+            <td>{{item.price}}</td>
+            <td>{{item.toppings}}</td>
+            <td>{{item.extras}}</td>
+            <td>
+              <form action="{% url 'delete' item.id %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-info">Remove</button>
+              </form>
+            </td>
+          </tr>
+        {% endfor %}
+
+      </tbody>
+    </table>
+    <div style="width: 100%; height: 80px;">
+      <h4 style="float: right; margin-right: 50px; margin-top:30px;">Total - {{subtotal}}</h4>
+    </div>
+    <div class="text-right">
+      <form action="{% url 'confirm' %}" method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger" style="margin-right: 70px; margin-top: 30px;">Place Order</button>
+      </form>
+    </div>
+  {% else %}
+    <p style="font-size: 20px;">No Item currently in the cart.</p>
+  {% endif %}
+
+{% endblock %}
