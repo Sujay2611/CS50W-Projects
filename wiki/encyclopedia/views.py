@@ -44,7 +44,6 @@ def add(request):
         res=util.get_entry(title)
         if res is None:
             file=open('entries/'+title+'.md','w')
-            file.write("# "+title+"\n")
             file.write(content)
             return redirect("/wiki/"+title)
         else:
@@ -56,3 +55,16 @@ def random(request):
     all=util.list_entries()
     c=choice(all)
     return redirect("/wiki/"+c)
+
+def edit(request,title):
+    if request.method == "GET":
+        file=open('entries/'+title+'.md','r')
+        return render(request,"encyclopedia/edit.html",{
+            "content": file.read(),
+            "title": title
+        })
+    else:
+        content=request.POST["content"]
+        file=open('entries/'+title+'.md','w')
+        file.write(content)
+        return redirect("/wiki/"+title)

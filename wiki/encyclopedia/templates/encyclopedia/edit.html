@@ -1,22 +1,18 @@
 {% extends "encyclopedia/layout.html" %}
 
 {% block title %}
-  Add Page
+  Edit Page
 {% endblock %}
 
 {% block body %}
-  <h1>Add Page</h1>
+  <h1>{{title}}</h1>
   <form method="post">
     {% csrf_token %}
     <div class="form-group">
-      <label>Title</label>
-      <input type="text" class="form-control" style="width: 60%;" name="title" required>
-    </div>
-    <div class="form-group">
     <label>Content</label>
-    <textarea class="form-control" name="content" style="width: 80%;" rows="3"></textarea>
+    <textarea class="form-control" name="content" style="width: 80%;" rows="8">{{content}}</textarea>
     <br>
     <button type="submit" class="btn btn-primary">Save</button>
-  </div>
+    </div>
   </form>
 {% endblock %}
